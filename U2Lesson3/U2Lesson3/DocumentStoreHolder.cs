@@ -9,7 +9,7 @@ using System.Text;
 
 namespace U2Lesson3
 {
-    public static class DocumentStoreHelper
+    public static class DocumentStoreHolder
     {
         private static readonly Lazy<IDocumentStore> LazyStore =
             new Lazy<IDocumentStore>(() =>
@@ -24,17 +24,6 @@ namespace U2Lesson3
 
                 var asm = Assembly.GetExecutingAssembly();
                 IndexCreation.CreateIndexes(asm, store);
-
-                var databaseRecord = store.Maintenance.Server.Send(new GetDatabaseRecordOperation(store.Database));
-
-                if (databaseRecord == null)
-                {
-                    return store;
-                }
-
-                var creaDatabaseOperation = new CreateDatabaseOperation(new DatabaseRecord(store.Database));
-
-                store.Maintenance.Server.Send(creaDatabaseOperation);
 
                 return store;
             });
