@@ -13,10 +13,10 @@ public static class DocumentStoreHolder
     {
         EmbeddedServer.Instance.StartServer(new ServerOptions
         {
-            ServerUrl = "http://127.0.0.1:8080",
+            ServerUrl = "http://live-test.ravendb.net",
         });
         
-        string serverURL = "http://127.0.0.1:8080";
+        string serverURL = "http://live-test.ravendb.net";
         if (string.IsNullOrEmpty(DatabaseName))
             throw new Exception("Database name is not set");
 
